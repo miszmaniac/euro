@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Mecz:</h3>
+<table>
+       <tr>
+             <td>
+          <h4><%= @match.team1 %></h4>
+          </td>
+          <td> - 
+          </td>
+          <td>
+<h4>            <%= @match.team2 %></h4>
+            </td>
+        </tr>
+<tr>
+     <td>  <%= @match.score1 %> </td>
+     <td></td>
+     <td>  <%= @match.score2 %> </td>
+</tr>
+<%= form_for([@match, @match.bets.build]) do |f| %>
+<tr>
+    <td colspan=3>
+         <strong>Dodaj Zakład</strong>
+    </td>
+</tr>
+<tr>
+     <td><%= f.label :score1, "Wynik #{@match.team1}" %></td>
+	<td>-</td>
+<td><%= f.label :score2, "Wynik #{@match.team2}" %></td>
+</tr>
+<tr>
+<td><%= f.text_field :score1, size: 5 %></td>
+<td></td>
+<td><%= f.text_field :score2, size: 5 %></td>
+</tr>
+<tr>
+<td>    <%= f.label :user , 'Kto obstawia'%><br />    </td>
+<td colspan=2>
+    <%= f.text_field :user %></td>
+</tr>
+<tr>
+<td colspan=3><%= f.submit "Utwórz zakład"%></td>
+</tr>
+<% end %>
+</table>
+
+
+
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>
