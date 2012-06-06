@@ -4,12 +4,12 @@
 <table>
        <tr>
              <td>
-          <%= @match.team1 %>
+          <h4><%= @match.team1 %></h4>
           </td>
           <td> - 
           </td>
           <td>
-            <%= @match.team2 %>
+<h4>            <%= @match.team2 %></h4>
             </td>
         </tr>
 <tr>

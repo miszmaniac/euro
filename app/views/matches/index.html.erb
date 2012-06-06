@@ -1,11 +1,10 @@
-<h1>Listing matches</h1>
+<h1>Lista meczy</h1>
 
 <table>
   <tr>
-    <th>Team1</th>
-    <th>Team2</th>
-    <th>Score1</th>
-    <th>Score2</th>
+    <th>Drużyna 1</th>
+    <th>Drużyna 2</th>
+    <th colspan=2>Wynik</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,13 +16,13 @@
     <td><%= match.team2 %></td>
     <td><%= match.score1 %></td>
     <td><%= match.score2 %></td>
-    <td><%= link_to 'Show', match %></td>
-    <td><%= link_to 'Edit', edit_match_path(match) %></td>
-    <td><%= link_to 'Destroy', match, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Pokaż', match %></td>
+    <!--<td><%= link_to 'Edit', edit_match_path(match) %></td>
+    <td><%= link_to 'Destroy', match, confirm: 'Are you sure?', method: :delete %></td>-->
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Match', new_match_path %>
+<%= link_to 'Nowy mecz', new_match_path %>
