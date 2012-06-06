@@ -42,7 +42,17 @@
 <td colspan=3><%= f.submit "Utwórz zakład"%></td>
 </tr>
 <% end %>
+
+<tr><td colspan=3>Obstawili:</td></tr> 
+<% @match.bets.each do |bet| %>
+   <tr>
+       <td></td>
+       <td colspan=2><%= bet.user %>
+   </tr>
+<% end %>
 </table>
+
+
 
 <!--
 <%= link_to 'Edit', edit_match_path(@match) %> |
