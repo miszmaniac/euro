@@ -1,60 +1,49 @@
-<p id="notice"><%= notice %></p>
-
-<h3>Mecz:</h3>
-<table>
-       <tr>
-             <td>
-          <h4><%= @match.team1 %></h4>
-          </td>
-          <td> - 
-          </td>
-          <td>
-<h4>            <%= @match.team2 %></h4>
-            </td>
-        </tr>
-<tr>
-     <td>  <%= @match.score1 %> </td>
-     <td></td>
-     <td>  <%= @match.score2 %> </td>
-</tr>
-<%= form_for([@match, @match.bets.build]) do |f| %>
-<tr>
-    <td colspan=3>
-         <strong>Dodaj Zakład</strong>
-    </td>
-</tr>
-<tr>
-     <td><%= f.label :score1, "Wynik #{@match.team1}" %></td>
-	<td>-</td>
-<td><%= f.label :score2, "Wynik #{@match.team2}" %></td>
-</tr>
-<tr>
-<td><%= f.text_field :score1, size: 5 %></td>
-<td></td>
-<td><%= f.text_field :score2, size: 5 %></td>
-</tr>
-<tr>
-<td>    <%= f.label :user , 'Kto obstawia'%><br />    </td>
-<td colspan=2>
-    <%= f.text_field :user %></td>
-</tr>
-<tr>
-<td colspan=3><%= f.submit "Utwórz zakład"%></td>
-</tr>
+<% if notice %>
+<div class="alert alert-info">
+	<%= notice %>
+</div>
 <% end %>
+<div class="span5">
+	<h1><%= @match.team1 %> - <%= @match.team2 %></h1>
+	<% if @match.matchtime < Time.now %>
+	<h3 class="center">Wynik <br /><%= @match.score1 %> - <%= @match.score2 %> </h3>
+	<% end %>
+	<p class="center">
+		<%= localize(@match.matchtime, :format => :short) %>
+	</p>
+	<div>
+		<% if @match.betsend < Time.now %>
+		<h4>Średni przewidywany wynik to:</h4>
+		<p class="center"><%= "#{@match.bets.average('score1').round} - #{@match.bets.average('score2').round}" %></p>
+		<% end %>
+	</div>
+	
+	<% if admin_user? %>
+	<%= link_to 'Edit', edit_match_path(@match), {class: "btn btn-small"} %>
+	<% end %>
+	<%= link_to 'Wróć', matches_path, {class: "btn btn-small btn-info"} %>
+	<div>
+		<%= render 'betlist' %>
+	</div>
+</div>
+<div class="span5">
+	<% if @match.betsend > Time.now %>
+	<% unless @match.bets.exists?(user_id: current_user) %>
+	<%= render 'betform' %>
+	<% else %>
+	<div class="alert alert-info">
+		<p>
+			Już zagłosowałeś w tym meczu
+		</p>
+	</div>
+	<% end %>
+	<% else %>
+	<div class="alert alert-success">
+		<p>
+			Przyjmowanie zakładów na ten mecz zostało zakończone
+		</p>
+	</div>
+	<% end %>
 
-<tr><td colspan=3>Obstawili:</td></tr> 
-<% @match.bets.each do |bet| %>
-   <tr>
-       <td></td>
-       <td colspan=2><%= bet.user %>
-   </tr>
-<% end %>
-</table>
+</div>
 
-
-
-<!--
-<%= link_to 'Edit', edit_match_path(@match) %> |
-<%= link_to 'Back', matches_path %>
--->

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607053446) do
+ActiveRecord::Schema.define(:version => 20120607174457) do
 
   create_table "bets", :force => true do |t|
     t.string   "user"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(:version => 20120607053446) do
     t.integer  "match_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   add_index "bets", ["match_id"], :name => "index_bets_on_match_id"
+  add_index "bets", ["user_id"], :name => "index_bets_on_user_id"
 
   create_table "matches", :force => true do |t|
     t.text     "team1"
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20120607053446) do
     t.integer  "score2"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "betsend"
+    t.datetime "matchtime"
   end
 
   create_table "users", :force => true do |t|

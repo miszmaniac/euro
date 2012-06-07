@@ -11,7 +11,7 @@
 
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessible :email, :name, :password, :password_confirmation, :admin
   has_secure_password
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
+  has_many :bets
+  has_many :matches, :through => :bets
   private
 
   def create_remember_token

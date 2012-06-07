@@ -1,28 +1,35 @@
 <h1>Lista meczy</h1>
 
-<table>
-  <tr>
-    <th>Drużyna 1</th>
-    <th>Drużyna 2</th>
-    <th colspan=2>Wynik</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-bordered">
+	<tr>
+		<th>Drużyna 1</th>
+		<th>Drużyna 2</th>
+		<th>Termin</th>
+		<th colspan=2>Wynik</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<% @matches.each do |match| %>
-  <tr>
-    <td><%= match.team1 %></td>
-    <td><%= match.team2 %></td>
-    <td><%= match.score1 %></td>
-    <td><%= match.score2 %></td>
-    <td><%= link_to 'Pokaż', match %></td>
-    <!--<td><%= link_to 'Edit', edit_match_path(match) %></td>
-    <td><%= link_to 'Destroy', match, confirm: 'Are you sure?', method: :delete %></td>-->
-  </tr>
-<% end %>
+	<% @matches.each do |match| %>
+	<tr>
+		<td><%= match.team1 %></td>
+		<td><%= match.team2 %></td>
+		<td><%= localize(match.matchtime, :format => :short) %></td>
+		<td><%= match.score1 %></td>
+		<td><%= match.score2 %></td>
+		<td><%= link_to 'Pokaż', match %></td>
+		<% if admin_user? %>
+		<td><%= link_to 'Edit', edit_match_path(match) %></td>
+		<td><%= link_to 'Usuń', match, confirm: 'Are you sure?', method: :delete %></td>
+		<% else %>
+		<td colspan=2></td>
+		<% end %>
+	</tr>
+	<% end %>
 </table>
 
 <br />
-
+<% if admin_user? %>
 <%= link_to 'Nowy mecz', new_match_path %>
+<% end %>

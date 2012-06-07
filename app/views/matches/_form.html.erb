@@ -1,33 +1,52 @@
-<%= form_for(@match) do |f| %>
-  <% if @match.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+<%= form_for(@match, class: 'form-horizontal') do |f| %>
+<% if @match.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
 
-      <ul>
-      <% @match.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<ul>
+		<% @match.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :team1 %><br />
-    <%= f.text_field :team1 %>
-  </div>
-  <div class="field">
-    <%= f.label :team2 %><br />
-    <%= f.text_field :team2 %>
-  </div>
-  <div class="field">
-    <%= f.label :score1 %><br />
-    <%= f.number_field :score1 %>
-  </div>
-  <div class="field">
-    <%= f.label :score2 %><br />
-    <%= f.number_field :score2 %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+	<%= f.label :team1, "Drużyna 1" %>
+	<br />
+	<%= f.text_field :team1 %>
+</div>
+<div class="field">
+	<%= f.label :team2 ,"Drużyna 2" %>
+	<br />
+	<%= f.text_field :team2 %>
+</div>
+<div class="field">
+	<%= f.label :score1, "Wynik 1" %>
+	<br />
+	<%= f.number_field :score1, size: 5  %>
+</div>
+<div class="field">
+	<%= f.label :score2, "Wynik 2"%>
+	<br />
+	<%= f.number_field :score2 %>
+</div>
+<div class="field well form-inline">
+	<%= f.label :matchtime, "Kiedy jest mecz"%>
+	<br />
+	<%= f.date_select :matchtime, {}, {class: 'input-small'} %>
+	<%= f.time_select :matchtime, {:ignore_date => true}, {class: 'input-small'} %>
+</div>
+<div class="field well form-inline">
+	<%= f.label :betsend, "Zakończenie zakładów"%>
+	<br />
+	<%= f.date_select :betsend, {}, {class: 'input-small'} %>
+	<%= f.time_select :betsend, {:ignore_date => true}, {class: 'input-small'} %>
+</div>
+
+<div class="actions">
+	<%= f.submit%>
+</div>
 <% end %>

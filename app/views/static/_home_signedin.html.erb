@@ -1,15 +1,39 @@
 <div class="row">
-  <aside class="span4">
-    <section>
-    
-    </section>
-    <section>
+	<aside class="span4">
+		<section>
+			<h4>Najbliższe mecze</h4>
+		</section>
+		<section>
+			<ul class="unstyled">
+			<% @next_matches.each do |m|%>
+				<li><%= link_to "#{m.team1} - #{m.team2} ".html_safe, match_path(m) %> 
+				<span class="pull-right"><%= localize(m.matchtime, :format => :short) %></li>
+			<% end %>
+			</ul>
+		</section>
+	</aside>
+	<div class="span8">
+		<table class="table table-striped table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th colspan=3>Moje zakłady</th>
+				</tr>
+				<tr>
+					<th>Mecz</th>
+					<th>Termin</th>
+					<th>Mój typ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @bets.each do |bet| %>
+				<tr>
+					<td><%= link_to "#{bet.match.team1} - #{bet.match.team2}".html_safe, match_path(bet.match) %></td>
+					<td><%= localize(bet.match.matchtime, :format => :short) %></td>
+					<td><%= "#{bet.score1} - #{bet.score2}" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 
-    </section>
-    <section>
-    </section>
-  </aside>
-  <div class="span8">
-    <h3>Zakłady</h3>
-  </div>
+	</div>
 </div>
