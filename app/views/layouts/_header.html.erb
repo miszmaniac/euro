@@ -1,0 +1,32 @@
+<header class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Liga typerów anonse.pl", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Strona główna",    root_path %></li>
+          <% if signed_in? %>
+              <li><%= link_to "Mecze",    matches_path %></li>
+              <li><%= link_to "Użytkownicy", usersindex_path %></li>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Konto <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Profil", current_user %></li>
+                  <li><%= link_to "Ustawienia", edit_user_path(current_user) %></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "Wyloguj", signout_path, method: "delete" %>
+                  </li>
+                </ul>
+              </li>
+          <% else %>
+              <li><%= link_to "Zaloguj", signin_path %></li>
+              <li><%= link_to "Załóż konto", signup_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

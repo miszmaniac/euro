@@ -1,0 +1,12 @@
+<% if object.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        Formualarz zawiera <%= I18n.t :error, :count => object.errors.count.to_i %>
+      </div>
+      <ul>
+        <% object.errors.full_messages.each do |msg| %>
+            <li>* <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
