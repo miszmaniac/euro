@@ -1,0 +1,15 @@
+<div class="page-header">
+<h4>Kto gra:</h4>
+</div>
+<ol>
+<% @match.bets.each do |bet| %>
+<li>
+	<%= gravatar_for bet.user, {size: 16} %>
+	<% if @match.matchtime < Time.now 
+		badge_class = (bet.score1 == @match.score1 && bet.score2 == @match.score2) ? "badge badge-success" : "badge" %>
+	<%= "<span class='#{badge_class}'>#{bet.score1}</span> - <span class='#{badge_class}'>#{bet.score2}</span>".html_safe %>
+	<% end %>
+	<%= bet.user.name %> 
+</li>
+<% end %>
+</ol>

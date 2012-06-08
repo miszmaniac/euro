@@ -1,0 +1,13 @@
+<p>
+	Zakłady przyjmowane są jeszcze <%= time_ago_in_words(@match.betsend) %>
+</p>
+<div class="well center">
+	<h4>Wprowadź wynik</h4>
+	<br />
+	<%= form_for [@match, @match.bets.build] do |f| %>
+	<%= f.text_field :score1, size: 5, class: 'input-small' %>
+	<%= f.text_field :score2, size: 5, class: 'input-small'  %>
+	<br />
+	<%= f.submit "Utwórz zakład"%>
+</div>
+<% end %>
