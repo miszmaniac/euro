@@ -1,9 +1,9 @@
 class RemoveUserFromBets < ActiveRecord::Migration
   def up
-    remove_column :matches, :user, :integer
+    remove_column :bets, :user
   end
 
   def down
-    add_column :matches, :user
+    add_column :bets, :user, :integer
   end
 end
