@@ -1,21 +1,34 @@
-<h1>Listing groups</h1>
+<h1>Grupy</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= group.name %></td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<table class="table">
+	<thead>
+		<tr>
+			<% @groups.each do |group| %>
+			<th><%= link_to group.name, group %></th>
+			<% end %>
+		</tr>
+		<% if admin_user? %>
+		<tr>
+			<% @groups.each do |group| %>
+			<td><%= link_to 'Edit', edit_group_path(group) %> <br />
+				
+				<%= link_to 'Show', group_path(group) %>
+			</td>
+			<% end %>
+		</tr>
+		<% end %>
+	</thead>
+	<tbody>
+		<tr>
+			<% @groups.each do |group| %>
+			<td>
+			<ul><% group.teams.each do |team| %>
+				<li><%= link_to team.name, group_team_path(group, team) %></li>
+			<% end %>
+			</ul></td>
+			<% end %>
+		</tr>
+	</tbody>
 </table>
 
 <br />

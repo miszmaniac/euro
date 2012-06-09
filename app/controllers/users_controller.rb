@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Witaj w Lidze typerów Anonse.pl!"
+      flash[:success] = "Witaj w Lidze typerów"
       redirect_to @user
     else
       render 'new'
