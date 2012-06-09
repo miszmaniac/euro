@@ -4,24 +4,25 @@
 </div>
 <% end %>
 <div class="span5">
-	<h1><%= @match.team1 %> - <%= @match.team2 %></h1>
-	<% if @match.matchtime < Time.now %>
-	<h3 class="center">Wynik <br /><%= @match.score1 %> - <%= @match.score2 %> </h3>
-	<% end %>
+	<h1><%= @match.name %></h1>
+	<%= "<h3 class=\"center\">Wynik	<br /> #{@match.score} </h3>".html_safe if @match.finished? %>
 	<p class="center">
 		<%= localize(@match.matchtime, :format => :short) %>
 	</p>
 	<div>
-		<% if @match.betsend < Time.now %>
+		<% if @match.betsfinished? && @match.average_score? %>
 		<h4>Średni przewidywany wynik to:</h4>
-		<p class="center"><%= "#{@match.bets.average('score1').round} - #{@match.bets.average('score2').round}" %></p>
+		<p class="center">
+			<%= @match.average_score %>
+		</p>
 		<% end %>
 	</div>
-	
-	<% if admin_user? %>
-	<%= link_to 'Edit', edit_match_path(@match), {class: "btn btn-small"} %>
-	<% end %>
-	<%= link_to 'Wróć', matches_path, {class: "btn btn-small btn-info"} %>
+	<div>
+		<% if admin_user? %>
+		<%= link_to 'Edit', edit_match_path(@match), {class: "btn btn-small"} %>
+		<% end %>
+		<%= link_to 'Wróć', matches_path, {class: "btn btn-small btn-info"} %>
+	</div>
 	<div>
 		<%= render 'betlist' %>
 	</div>

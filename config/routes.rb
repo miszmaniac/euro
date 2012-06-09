@@ -1,9 +1,15 @@
 Euro::Application.routes.draw do
+
+
   scope "(:locale)", :locale => /en|pl/ do
     resources :matches do
       resources :bets
     end
-
+    
+    resources :groups do
+      resources :teams  
+    end
+    
     resources :users
     resources :sessions, only: [:new, :create, :destroy]
 

@@ -1,0 +1,29 @@
+<h1><%= @team.name %></h1>
+<div class="span6">
+	<table class="table table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th>Mecz</th>
+				<th>Wynik</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @team.matches.each do |match| %>
+			<tr>
+				<td><%= match.name %></td>
+				<td><%= match.score %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div class="span4">
+	<dl>
+		<dt>Rozegrane mecze</dt>
+		<dd><%= @team.matches_played %></dd>
+		<dt>Strzelone bramki</dt>
+		<dd><%= @team.goals_scored %></dd>
+		<dt>Stracone bramki</dt>
+		<dd><%= @team.goals_lost %></dd>
+	</dl>
+</div>

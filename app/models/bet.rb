@@ -5,7 +5,9 @@ class Bet < ActiveRecord::Base
 
   validates :score1, :presence => true
   validates :score2,  :presence => true
-  validates :user_id, :presence => true, :uniqueness => true
-
-
+  validates :user_id, :presence => true
+  
+  def score
+    "#{score1} - #{score2}"
+  end
 end

@@ -14,14 +14,14 @@
 <% end %>
 
 <div class="field">
-	<%= f.label :team1, "Drużyna 1" %>
+	<%= f.label :team1_id, "Drużyna 1" %>
 	<br />
-	<%= f.text_field :team1 %>
+	<%= f.collection_select( :team1_id, Team.all, :id, :name) %>
 </div>
 <div class="field">
-	<%= f.label :team2 ,"Drużyna 2" %>
+	<%= f.label :team2_id ,"Drużyna 2" %>
 	<br />
-	<%= f.text_field :team2 %>
+	<%= f.collection_select( :team2_id, Team.all, :id, :name) %>
 </div>
 <div class="field">
 	<%= f.label :score1, "Wynik 1" %>

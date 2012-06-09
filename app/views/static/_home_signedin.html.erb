@@ -6,7 +6,7 @@
 		<section>
 			<ul class="unstyled">
 			<% @next_matches.each do |m|%>
-				<li><%= link_to "#{m.team1} - #{m.team2} ".html_safe, match_path(m) %> 
+				<li><%= link_to "#{m.name}".html_safe, match_path(m) %> 
 				<span class="pull-right"><%= localize(m.matchtime, :format => :short) %></li>
 			<% end %>
 			</ul>
@@ -27,7 +27,7 @@
 			<tbody>
 				<% @bets.each do |bet| %>
 				<tr>
-					<td><%= link_to "#{bet.match.team1} - #{bet.match.team2}".html_safe, match_path(bet.match) %></td>
+					<td><%= link_to "#{bet.match.name}".html_safe, match_path(bet.match) %></td>
 					<td><%= localize(bet.match.matchtime, :format => :short) %></td>
 					<td><%= "#{bet.score1} - #{bet.score2}" %></td>
 				</tr>

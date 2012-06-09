@@ -13,8 +13,8 @@
 
 	<% @matches.each do |match| %>
 	<tr>
-		<td><%= match.team1 %></td>
-		<td><%= match.team2 %></td>
+		<td><%= link_to match.team1.name, group_team_path(match.team1.group_id, match.team1) %></td>
+		<td><%= link_to match.team2.name, group_team_path(match.team2.group_id, match.team2) %></td>
 		<td><%= localize(match.matchtime, :format => :short) %></td>
 		<td><%= match.score1 %></td>
 		<td><%= match.score2 %></td>
