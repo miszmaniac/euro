@@ -31,14 +31,16 @@ class Bet < ActiveRecord::Base
 
   def points
     points = 0
-    if result_hit?
-      points += 1
-      if score_hit?
+    unless match.score1.nil?
+      if result_hit?
+        points += 1
+        if score_hit?
         points += 3
-      elsif
+        elsif
         diff = (match.score1.to_i - score1.to_i).abs + (match.score2.to_i - score2.to_i).abs
-        if diff < 3
+          if diff < 3
           points += 3 - diff
+          end
         end
       end
     end
