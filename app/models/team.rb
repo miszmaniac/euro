@@ -22,4 +22,23 @@ class Team < ActiveRecord::Base
   def goals_lost
     as_team1.sum(&:score2) + as_team2.sum(&:score1)
   end
+  
+  def points
+    points = 0
+    as_team1.each do |m|
+      if m.result == 1
+        points += 3
+      elsif m.result == 0  
+        points += 1
+      end 
+    end
+    as_team2.each do |m|
+      if m.result == 2
+        points += 3
+      elsif m.result == 0  
+        points += 1
+      end 
+    end
+    return points
+  end
 end

@@ -30,6 +30,17 @@ class Match < ActiveRecord::Base
     "#{score1} - #{score2}" unless score1.nil?
   end     
   
+  def result
+    result = score1 - score2 
+    if result > 0 
+      return 1
+    elsif result < 0
+      return 2
+    else 
+      return 0
+    end
+  end
+    
   def average_score 
     unless bets.empty?
       "#{bets.average('score1').round} - #{bets.average('score2').round}"

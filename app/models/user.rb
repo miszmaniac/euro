@@ -8,7 +8,6 @@
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #
-
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :admin
@@ -29,9 +28,17 @@ class User < ActiveRecord::Base
 
   has_many :bets
   has_many :matches, :through => :bets
+
+  def points
+    points = 0
+    bets.each{|b| points += b.points}
+    return points
+  end
+
   private
 
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
   end
+
 end
