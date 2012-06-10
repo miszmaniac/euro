@@ -31,7 +31,7 @@ class Match < ActiveRecord::Base
   end     
   
   def result
-    result = score1 - score2 
+    result = score1.to_i - score2.to_i 
     if result > 0 
       return 1
     elsif result < 0
