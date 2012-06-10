@@ -10,7 +10,7 @@
 		<tbody>
 			<% @team.matches.each do |match| %>
 			<tr>
-				<td><%= match.name %></td>
+				<td><%= link_to match.name, match %></td>
 				<td><%= match.score %></td>
 			</tr>
 			<% end %>

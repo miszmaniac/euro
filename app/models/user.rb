@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     return points
   end
 
+  def self.best_scorers 
+    all.sort {|a,b| b.points <=> a.points}
+  end
+
   private
 
   def create_remember_token

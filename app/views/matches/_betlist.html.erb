@@ -9,8 +9,8 @@
 	<% @match.bets.each do |bet| %>
 	<tr>
 		<td><%= gravatar_for bet.user, {size: 16} %>
-		<%= bet.user.name %></td>
-		<td><%= bet.score if @match.finished? %></td>
+		<%= link_to bet.user.name, bet.user %></td>
+		<td><%= bet.score if @match.betsend? %></td>
 	</tr>
 	<% end %>
 	</tbody>

@@ -1,16 +1,40 @@
 <div class="row">
 	<aside class="span4">
-		<section>
-			<h4>Najbliższe mecze</h4>
-		</section>
-		<section>
-			<ul class="unstyled">
-			<% @next_matches.each do |m|%>
-				<li><%= link_to "#{m.name}".html_safe, match_path(m) %> 
-				<span class="pull-right"><%= localize(m.matchtime, :format => :short) %></li>
-			<% end %>
-			</ul>
-		</section>
+		<table class="table table-bordered table-condensed">
+			<tr>
+				<th colspan=2>Najbliższe mecze</th>
+			</tr>
+			<tr>
+				<th>Mecz</th>
+				<th>Data</th>
+			</tr>
+			<tbody>
+				<% @next_matches.each do |m|%>
+				<tr>
+					<td><%= link_to "#{m.name}".html_safe, match_path(m) %></td>
+					<td><%= localize(m.matchtime, :format => :short) %></td>
+				</tr>
+				<% end %>
+			</tbody>
+
+		</table>
+		<table class="table table-bordered table-condensed">
+			<tr>
+				<th colspan=2>Najlepsi gracze</th>
+			</tr>
+			<tr>
+				<th>Użytkownik</th>
+				<th>Punkty</th>
+			</tr>
+			<tbody>
+				<% @best_scorers.each do |user| %>
+				<tr>
+					<td><%= link_to user.name, user %></td>
+					<td><%= user.points %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 	</aside>
 	<div class="span8">
 		<table class="table table-striped table-bordered table-condensed">
@@ -25,7 +49,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% @bets.each do |bet| %>
+				<% @bets.reverse_each do |bet| %>
 				<tr>
 					<td><%= link_to "#{bet.match.name}".html_safe, match_path(bet.match) %></td>
 					<td><%= localize(bet.match.matchtime, :format => :short) %></td>

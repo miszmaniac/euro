@@ -1,31 +1,31 @@
 <h1>Grupy</h1>
 
-<table class="table">
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<% @groups.each do |group| %>
-			<th><%= link_to group.name, group %></th>
+			<th><%= link_to "#{group.name} (pokaż)", group %></th>
 			<% end %>
 		</tr>
-		<% if admin_user? %>
-		<tr>
-			<% @groups.each do |group| %>
-			<td><%= link_to 'Edit', edit_group_path(group) %> <br />
-				
-				<%= link_to 'Show', group_path(group) %>
-			</td>
-			<% end %>
-		</tr>
-		<% end %>
 	</thead>
 	<tbody>
 		<tr>
 			<% @groups.each do |group| %>
 			<td>
-			<ul><% group.teams.each do |team| %>
-				<li><%= link_to team.name, group_team_path(group, team) %></li>
+			<table class="table table-condensed">
+				<tr>
+					<th>Drużyna</th>
+					<th>Mecze</th>
+					<th>Punkty</th>
+				</tr>
+				<% group.teams.each do |team| %>
+				<tr>
+				<td><%= link_to team.name, group_team_path(group, team) %></td>
+				<td><%= team.matches.count %></td>
+				<td><%= team.points %></td>
+				</tr>
 			<% end %>
-			</ul></td>
+			</table></td>
 			<% end %>
 		</tr>
 	</tbody>
@@ -33,4 +33,4 @@
 
 <br />
 
-<%= link_to 'New Group', new_group_path %>
+<%= link_to 'Nowa Grupa', new_group_path %>
