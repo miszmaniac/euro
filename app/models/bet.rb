@@ -36,7 +36,7 @@ class Bet < ActiveRecord::Base
       if score_hit?
         points += 3
       elsif
-        diff = (match.score1 - score1).abs + (match.score2 - score2).abs
+        diff = (match.score1.to_i - score1.to_i).abs + (match.score2.to_i - score2.to_i).abs
         if diff < 3
           points += 3 - diff
         end
