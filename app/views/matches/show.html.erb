@@ -28,7 +28,7 @@
 	</div>
 </div>
 <div class="span5">
-	<% unless @match.betsend? %>
+	<% unless @match.betsfinished? %>
 	<% unless @match.bets.exists?(user_id: current_user) %>
 	<%= render 'betform' %>
 	<% else %>

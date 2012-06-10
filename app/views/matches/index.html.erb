@@ -11,7 +11,7 @@
 		<th></th>
 	</tr>
 
-	<% @matches.each do |match| %>
+	<% @matches.reverse_each do |match| %>
 	<tr>
 		<td><%= link_to match.team1.name, group_team_path(match.team1.group_id, match.team1) %></td>
 		<td><%= link_to match.team2.name, group_team_path(match.team2.group_id, match.team2) %></td>

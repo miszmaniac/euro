@@ -48,6 +48,6 @@ class Match < ActiveRecord::Base
   end   
   
   def average_score?
-    !bets.empty?
+    !bets.empty? && bets.count > 2
   end
 end
